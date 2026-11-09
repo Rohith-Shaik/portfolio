@@ -55,85 +55,118 @@
       color: #f1f5f9;
       overflow-x: hidden;
     }
-  <!-- Toast animation -->
-  @keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  .animate-toast {
-    animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  /* STRICT PRINT STYLES FOR EXACT 1-PAGE PDF EXPORT */
-  @media print {
-    /* Hide everything on the webpage except the isolated resume element */
-    body * {
-      visibility: hidden !important;
-    }
-    #navbar, #home, #about, #skills, #projects, #education, #resume, #contact, footer, #toast-container, #project-modal, .modal-header-bar, .bg-blur-graphic {
-      display: none !important;
-    }
     
-    /* Reveal and position only the printable resume element */
-    #resume-modal {
-      position: absolute !important;
-      left: 0 !important;
-      top: 0 !important;
-      width: 100% !important;
-      height: auto !important;
-      background: #ffffff !important;
-      display: block !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      overflow: visible !important;
-    }
-    #resume-modal > div {
-      max-width: 100% !important;
-      max-height: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      background: #ffffff !important;
-    }
-    #resume-printable, #resume-printable * {
-      visibility: visible !important;
-      color: #000000 !important;
-      background: #ffffff !important;
-    }
-    #resume-printable {
-      position: absolute !important;
-      left: 0 !important;
-      top: 0 !important;
-      width: 210mm !important;
-      height: 297mm !important;
-      padding: 12mm 15mm !important;
-      margin: 0 !important;
-      box-sizing: border-box !important;
-      font-size: 8.5pt !important;
-      line-height: 1.35 !important;
-      overflow: hidden !important;
-      page-break-inside: avoid !important;
+    .bg-grid-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
-    @page {
-      size: A4 portrait;
-      margin: 0;
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-  }
+    .glass-panel:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-start infinite;
+      color: #60a5fa;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080c14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+
+    .nav-link.active {
+      color: #60a5fa;
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #3b82f6;
+      border-radius: 2px;
+      margin-top: 2px;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .animate-toast {
+      animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* STRICT PRINT CSS FOR 1-PAGE PDF EXPORT */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #resume-modal, #resume-modal * {
+        visibility: visible !important;
+      }
+      #resume-modal {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 99999 !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #resume-printable {
+        background: #ffffff !important;
+        color: #000000 !important;
+        width: 210mm !important;
+        max-height: 297mm !important;
+        padding: 10mm !important;
+        margin: 0 auto !important;
+        box-shadow: none !important;
+        border: none !important;
+        overflow: hidden !important;
+        font-size: 8.5pt !important;
+        line-height: 1.35 !important;
+      }
+      .modal-header-bar, #navbar, #home, #about, #skills, #projects, #education, #resume, #contact, footer, #toast-container, #project-modal {
+        display: none !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-brand-600 selection:text-white relative">
 
-  <!-- BACKGROUND GRAPHIC BLURS -->
-  <div class="bg-blur-graphic fixed top-0 left-1/4 -z-10 w-[500px] h-[500px] bg-brand-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
-  <div class="bg-blur-graphic fixed top-1/2 right-0 -z-10 w-[450px] h-[450px] bg-accent-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
+  <div class="fixed top-0 left-1/4 -z-10 w-[500px] h-[500px] bg-brand-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
+  <div class="fixed top-1/2 right-0 -z-10 w-[450px] h-[450px] bg-accent-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
 
-  <!-- 1. HEADER & STICKY NAVIGATION -->
+  <!-- HEADER & NAVIGATION -->
   <header id="navbar" class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Logo Brand -->
       <a href="#home" class="group flex items-center gap-3 text-xl font-bold tracking-tight text-white">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-600 flex items-center justify-center text-white font-mono font-bold shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
           SR
@@ -141,7 +174,6 @@
         <span>SHAIK ROHITH<span class="text-brand-400">.</span></span>
       </a>
 
-      <!-- Desktop Nav Items -->
       <nav class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
         <a href="#home" class="nav-link hover:text-white transition-colors py-1">Home</a>
         <a href="#about" class="nav-link hover:text-white transition-colors py-1">About Me</a>
@@ -152,7 +184,6 @@
         <a href="#contact" class="nav-link hover:text-white transition-colors py-1">Contact</a>
       </nav>
 
-      <!-- Desktop CTA Action Buttons -->
       <div class="hidden lg:flex items-center gap-3">
         <button onclick="openResumeModal()" class="px-4 py-2 text-xs font-semibold text-slate-200 border border-slate-700 hover:border-brand-500 rounded-lg hover:bg-brand-500/10 transition-all flex items-center gap-2">
           <i class="fa-regular fa-file-pdf text-brand-400"></i> ATS Resume
@@ -162,13 +193,11 @@
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden p-2.5 text-slate-300 hover:text-white rounded-lg focus:outline-none">
+      <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 text-slate-300 hover:text-white rounded-lg focus:outline-none">
         <i class="fa-solid fa-bars text-xl"></i>
       </button>
     </div>
 
-    <!-- Mobile Slide Menu Drawer -->
     <div id="mobile-menu" class="hidden md:hidden border-b border-slate-800 bg-darkcard/95 backdrop-blur-xl px-6 py-5 space-y-4">
       <a href="#home" onclick="closeMobileMenu()" class="block text-slate-300 hover:text-brand-400 font-medium py-1">Home</a>
       <a href="#about" onclick="closeMobileMenu()" class="block text-slate-300 hover:text-brand-400 font-medium py-1">About Me</a>
@@ -188,12 +217,11 @@
     </div>
   </header>
 
-  <!-- 1. HOME / HERO SECTION -->
+  <!-- HOME SECTION -->
   <section id="home" class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 bg-grid-pattern">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Hero Text Details -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -213,27 +241,24 @@
             Passionate <strong>MCA Graduate</strong> skilled in Python, Java, Django, FastAPI, MySQL, PostgreSQL, HTML, CSS, JavaScript, Bootstrap, and version control. Dedicated to writing clean, modular backend logic and building high-performance web applications.
           </p>
 
-          <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <a href="#projects" class="px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 rounded-xl shadow-lg shadow-brand-600/30 hover:shadow-brand-500/40 transition-all flex items-center gap-2">
+            <a href="#projects" class="px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
               <i class="fa-solid fa-code"></i> View Projects
             </a>
             <a href="#contact" class="px-6 py-3.5 text-sm font-semibold text-slate-200 border border-slate-700 hover:border-brand-500 rounded-xl hover:bg-slate-800/80 transition-all flex items-center gap-2">
               <i class="fa-solid fa-paper-plane"></i> Contact Me
             </a>
-            <a href="shaik_rohith_resume.pdf" download="Shaik_Rohith_Resume.pdf" class="px-6 py-3.5 text-sm font-semibold text-brand-400 border border-brand-500/30 hover:border-brand-500 bg-brand-500/10 hover:bg-brand-500/20 rounded-xl transition-all flex items-center gap-2">
-              <i class="fa-solid fa-download"></i> Download Resume PDF
-            </a>
+            <button onclick="downloadResume()" class="px-6 py-3.5 text-sm font-semibold text-brand-400 border border-brand-500/30 hover:border-brand-500 bg-brand-500/10 hover:bg-brand-500/20 rounded-xl transition-all flex items-center gap-2">
+              <i class="fa-solid fa-download"></i> Download Resume
+            </button>
           </div>
 
-          <!-- Live Portfolio Link Pill -->
           <div class="pt-2">
             <a href="https://rohithshaik.netlify.app" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 px-3.5 py-1.5 rounded-lg border border-emerald-500/20 transition-all">
               <i class="fa-solid fa-globe"></i> Live Portfolio: https://rohithshaik.netlify.app
             </a>
           </div>
 
-          <!-- Quick Stats Pill List -->
           <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 max-w-md">
             <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
               <div class="text-xl font-bold text-white font-mono">8.76</div>
@@ -250,7 +275,6 @@
           </div>
         </div>
 
-        <!-- Terminal Interactive Code Window -->
         <div class="lg:col-span-5">
           <div class="glass-panel rounded-2xl p-6 shadow-2xl border border-slate-800 relative">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
@@ -272,7 +296,7 @@
     self.languages = [<span class="text-emerald-400">"Python"</span>, <span class="text-emerald-400">"Java"</span>]
     self.frameworks = [<span class="text-emerald-400">"Django"</span>, <span class="text-emerald-400">"FastAPI"</span>]
     self.databases = [<span class="text-emerald-400">"MySQL"</span>, <span class="text-emerald-400">"PostgreSQL"</span>]
-    self.status = <span class="text-emerald-400">"Ready to contribute & scale"</span>
+    self.status = <span class="text-emerald-400">"Ready to contribute"</span>
 
 dev = JuniorDeveloper()
 <span class="text-accent-400">print</span>(f<span class="text-emerald-400">"Status: {dev.status}"</span>)</code></pre>
@@ -288,28 +312,25 @@ dev = JuniorDeveloper()
     </div>
   </section>
 
-  <!-- 2. ABOUT ME SECTION -->
+  <!-- ABOUT SECTION -->
   <section id="about" class="py-20 bg-darkcard/40 border-y border-slate-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-xs uppercase tracking-widest font-mono text-brand-400 font-semibold mb-2">Background & Focus</h2>
         <h3 class="text-3xl sm:text-4xl font-bold text-white">About Shaik Rohith</h3>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
-        <!-- Left: Qualification & Objective Narrative -->
         <div class="lg:col-span-7 space-y-6">
           <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800">
             <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
               <i class="fa-solid fa-graduation-cap text-brand-400"></i> MCA Qualification & Academic Foundation
             </h4>
             <p class="text-slate-300 text-sm leading-relaxed mb-4">
-              I am a <strong>Master of Computer Applications (MCA)</strong> graduate (2023–2025) from <strong>Jagan's Institute of Management and Computer Studies, Nellore</strong>, affiliated to Vikrama Simhapuri University, achieving a cumulative grade point average of <strong>8.76 CGPA</strong>. Prior to my MCA, I completed my Bachelor of Science (B.Sc) from Krishna Chaitanya Degree College with a <strong>9.66 CGPA</strong>.
+              I am a <strong>Master of Computer Applications (MCA)</strong> graduate (2023–2025) from <strong>Jagan's Institute of Management and Computer Studies, Nellore</strong>, affiliated to Vikrama Simhapuri University, achieving <strong>8.76 CGPA</strong>. Prior to my MCA, I completed my B.Sc from Krishna Chaitanya Degree College with <strong>9.66 CGPA</strong>.
             </p>
             <p class="text-slate-300 text-sm leading-relaxed">
-              My academic journey has built a disciplined foundation in core computer science principles—ranging from Data Structures & Algorithms, Object-Oriented Programming (OOP), and Relational Database System Architecture to modern Full-Stack Web Technologies.
+              My academic journey built a solid foundation in computer science, data structures, algorithms, object-oriented design, and database management systems.
             </p>
           </div>
 
@@ -318,104 +339,63 @@ dev = JuniorDeveloper()
               <i class="fa-solid fa-bullseye text-accent-400"></i> Career Objective
             </h4>
             <p class="text-slate-300 text-sm leading-relaxed">
-              To secure an entry-level position as an <strong>Associate / Junior Developer or Python Developer</strong> in a forward-thinking IT organization where I can leverage my expertise in Python backend frameworks (Django & FastAPI), database design, and modern frontend tools to deliver efficient software solutions while accelerating my professional growth.
+              To secure an entry-level position as an <strong>Associate / Junior Developer</strong> in an innovative IT firm where I can apply my Python, Django, FastAPI, and database expertise to build efficient software applications.
             </p>
           </div>
         </div>
 
-        <!-- Right: Technical Interests & Languages -->
         <div class="lg:col-span-5 space-y-6">
-          
-          <!-- Key Technical Interests -->
           <div class="glass-panel p-6 rounded-2xl border border-slate-800">
             <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-              <i class="fa-solid fa-heart text-red-400"></i> Personal & Technical Interests
+              <i class="fa-solid fa-heart text-red-400"></i> Technical Interests
             </h4>
             <div class="space-y-3">
               <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
                 <i class="fa-solid fa-cubes text-brand-400 mt-1"></i>
                 <div>
                   <span class="text-xs font-bold text-white block">Backend API Engineering</span>
-                  <span class="text-2xs text-slate-400">Designing REST APIs with Python, Django & FastAPI</span>
-                </div>
-              </div>
-              <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
-                <i class="fa-solid fa-gamepad text-emerald-400 mt-1"></i>
-                <div>
-                  <span class="text-xs font-bold text-white block">Game Logic & Simulations</span>
-                  <span class="text-2xs text-slate-400">Exploring interactive canvas physics and algorithmic game loops</span>
+                  <span class="text-2xs text-slate-400">REST APIs with Python, Django & FastAPI</span>
                 </div>
               </div>
               <div class="flex items-start gap-3 p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
                 <i class="fa-solid fa-database text-purple-400 mt-1"></i>
                 <div>
                   <span class="text-xs font-bold text-white block">Database Optimization</span>
-                  <span class="text-2xs text-slate-400">SQL schema design, query indexing, and ORM mapping</span>
+                  <span class="text-2xs text-slate-400">Relational SQL schema design & query tuning</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Languages Card -->
           <div class="glass-panel p-6 rounded-2xl border border-slate-800">
             <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-              <i class="fa-solid fa-language text-brand-400"></i> Language Proficiency
+              <i class="fa-solid fa-language text-brand-400"></i> Languages
             </h4>
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-xs font-medium mb-1">
-                  <span class="text-white">English</span>
-                  <span class="text-brand-400">Professional Working</span>
-                </div>
-                <div class="w-full bg-slate-800 h-1.5 rounded-full">
-                  <div class="bg-brand-500 h-1.5 rounded-full" style="width: 85%"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs font-medium mb-1">
-                  <span class="text-white">Telugu</span>
-                  <span class="text-emerald-400">Native / Mother Tongue</span>
-                </div>
-                <div class="w-full bg-slate-800 h-1.5 rounded-full">
-                  <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs font-medium mb-1">
-                  <span class="text-white">Hindi</span>
-                  <span class="text-accent-400">Conversational</span>
-                </div>
-                <div class="w-full bg-slate-800 h-1.5 rounded-full">
-                  <div class="bg-accent-500 h-1.5 rounded-full" style="width: 75%"></div>
-                </div>
-              </div>
+            <div class="space-y-3 text-xs">
+              <div class="flex justify-between"><span class="text-white">English</span><span class="text-brand-400">Professional Working</span></div>
+              <div class="flex justify-between"><span class="text-white">Telugu</span><span class="text-emerald-400">Native / Mother Tongue</span></div>
+              <div class="flex justify-between"><span class="text-white">Hindi</span><span class="text-accent-400">Conversational</span></div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- 3. TECHNICAL SKILLS SECTION -->
+  <!-- SKILLS SECTION -->
   <section id="skills" class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
           <h2 class="text-xs uppercase tracking-widest font-mono text-brand-400 font-semibold mb-2">Technical Proficiency</h2>
           <h3 class="text-3xl sm:text-4xl font-bold text-white">Skills & Toolkit</h3>
         </div>
-
-        <!-- Search Bar -->
         <div class="relative w-full md:w-72">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
           <input type="text" id="skill-search" onkeyup="filterSkills()" placeholder="Search skill (e.g. Django)..." class="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors" />
         </div>
       </div>
 
-      <!-- Filter Tabs -->
       <div class="flex flex-wrap items-center gap-2 mb-8 border-b border-slate-800 pb-4">
         <button onclick="setSkillCategory('all')" id="tab-all" class="skill-tab px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white transition-all">All Skills</button>
         <button onclick="setSkillCategory('lang')" id="tab-lang" class="skill-tab px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all">Languages</button>
@@ -423,174 +403,104 @@ dev = JuniorDeveloper()
         <button onclick="setSkillCategory('db')" id="tab-db" class="skill-tab px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all">Databases & Tools</button>
       </div>
 
-      <!-- Skill Grid Cards -->
       <div id="skills-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        
-        <!-- Python -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="lang" data-name="python">
           <i class="fa-brands fa-python text-3xl text-yellow-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">Python</h4>
-          <span class="text-2xs text-slate-400 font-mono">Advanced</span>
         </div>
-
-        <!-- Java -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="lang" data-name="java">
           <i class="fa-brands fa-java text-3xl text-orange-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">Java</h4>
-          <span class="text-2xs text-slate-400 font-mono">Core</span>
         </div>
-
-        <!-- Django -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="framework" data-name="django">
           <i class="fa-solid fa-layer-group text-3xl text-emerald-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">Django</h4>
-          <span class="text-2xs text-slate-400 font-mono">Advanced</span>
         </div>
-
-        <!-- FastAPI -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="framework" data-name="fastapi">
           <i class="fa-solid fa-bolt text-3xl text-teal-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">FastAPI</h4>
-          <span class="text-2xs text-slate-400 font-mono">Intermediate</span>
         </div>
-
-        <!-- HTML5 -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="framework" data-name="html html5">
           <i class="fa-brands fa-html5 text-3xl text-orange-500 mb-2"></i>
           <h4 class="text-xs font-bold text-white">HTML5</h4>
-          <span class="text-2xs text-slate-400 font-mono">Proficient</span>
         </div>
-
-        <!-- CSS3 -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="framework" data-name="css css3">
           <i class="fa-brands fa-css3-alt text-3xl text-blue-500 mb-2"></i>
           <h4 class="text-xs font-bold text-white">CSS3</h4>
-          <span class="text-2xs text-slate-400 font-mono">Proficient</span>
         </div>
-
-        <!-- JavaScript -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="lang" data-name="javascript js">
           <i class="fa-brands fa-js text-3xl text-yellow-300 mb-2"></i>
           <h4 class="text-xs font-bold text-white">JavaScript</h4>
-          <span class="text-2xs text-slate-400 font-mono">Intermediate</span>
         </div>
-
-        <!-- Bootstrap -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="framework" data-name="bootstrap">
           <i class="fa-brands fa-bootstrap text-3xl text-purple-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">Bootstrap</h4>
-          <span class="text-2xs text-slate-400 font-mono">Proficient</span>
         </div>
-
-        <!-- MySQL -->
-        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="mysql database">
+        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="mysql">
           <i class="fa-solid fa-server text-3xl text-blue-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">MySQL</h4>
-          <span class="text-2xs text-slate-400 font-mono">Advanced</span>
         </div>
-
-        <!-- PostgreSQL -->
-        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="postgresql postgres">
+        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="postgresql">
           <i class="fa-solid fa-database text-3xl text-indigo-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">PostgreSQL</h4>
-          <span class="text-2xs text-slate-400 font-mono">Intermediate</span>
         </div>
-
-        <!-- Git -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="git">
           <i class="fa-brands fa-git-alt text-3xl text-red-500 mb-2"></i>
           <h4 class="text-xs font-bold text-white">Git</h4>
-          <span class="text-2xs text-slate-400 font-mono">Version Control</span>
         </div>
-
-        <!-- GitHub -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="github">
           <i class="fa-brands fa-github text-3xl text-slate-200 mb-2"></i>
           <h4 class="text-xs font-bold text-white">GitHub</h4>
-          <span class="text-2xs text-slate-400 font-mono">Repository</span>
         </div>
-
-        <!-- VS Code -->
-        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="vs code vscode">
+        <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="vscode">
           <i class="fa-solid fa-code text-3xl text-sky-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">VS Code</h4>
-          <span class="text-2xs text-slate-400 font-mono">IDE</span>
         </div>
-
-        <!-- PyCharm -->
         <div class="skill-card glass-panel p-4 rounded-xl border border-slate-800 text-center hover:border-brand-500 transition-all" data-category="db" data-name="pycharm">
           <i class="fa-solid fa-gear text-3xl text-emerald-400 mb-2"></i>
           <h4 class="text-xs font-bold text-white">PyCharm</h4>
-          <span class="text-2xs text-slate-400 font-mono">IDE</span>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- 4. PROJECTS SECTION -->
+  <!-- PROJECTS SECTION -->
   <section id="projects" class="py-20 bg-darkcard/40 border-t border-slate-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
           <h2 class="text-xs uppercase tracking-widest font-mono text-brand-400 font-semibold mb-2">Software Applications</h2>
           <h3 class="text-3xl sm:text-4xl font-bold text-white">Academic & Web Projects</h3>
         </div>
         <p class="text-slate-400 text-xs sm:text-sm max-w-md mt-2 md:mt-0">
-          Handcrafted web applications built during MCA academic study, demonstrating full CRUD functionality, database indexing, and responsive UI design.
+          Handcrafted web applications built during MCA academic study, demonstrating full CRUD functionality and robust database design.
         </p>
       </div>
 
-      <!-- Project Cards Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-        <!-- PROJECT 1: Student Management System -->
+        <!-- Student Management System -->
         <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-brand-500/50 transition-all">
           <div class="p-6 sm:p-8">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-2xs font-mono font-semibold px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
-                Primary Academic Project
-              </span>
+              <span class="text-2xs font-mono font-semibold px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">Primary Academic Project</span>
               <span class="text-2xs text-slate-500 font-mono">Python / Django</span>
             </div>
-
             <h4 class="text-2xl font-bold text-white mb-3">Student Management System</h4>
-            
             <p class="text-slate-300 text-sm leading-relaxed mb-6">
-              A comprehensive administrative web platform built to automate student record registration, course assignments, grade tracking, dynamic filtering, and administrative oversight.
+              Administrative platform automating student record registration, course assignments, grade tracking, and administrative oversight.
             </p>
-
             <div class="space-y-2 mb-6 text-xs text-slate-300">
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-brand-400 mt-0.5"></i>
-                <span>Role-based access & authentication (Admins, Faculty, Students).</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-brand-400 mt-0.5"></i>
-                <span>Full CRUD record management with dynamic search & filtering.</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-brand-400 mt-0.5"></i>
-                <span>MySQL relational backend with optimized query handling.</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-brand-400 mt-0.5"></i>
-                <span>Responsive user interface designed with Bootstrap & DTL.</span>
-              </div>
+              <div class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5"></i><span>Role-based access authentication (Admins, Faculty, Students).</span></div>
+              <div class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5"></i><span>Full CRUD record management with search & filtering.</span></div>
+              <div class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-0.5"></i><span>MySQL relational backend with optimized query handling.</span></div>
             </div>
-
-            <!-- Tech Tags -->
             <div class="flex flex-wrap gap-2 mb-6">
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Python</span>
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Django</span>
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">MySQL</span>
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Bootstrap</span>
-              <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">JavaScript</span>
             </div>
           </div>
-
-          <!-- Bottom Card Buttons -->
           <div class="px-6 sm:px-8 py-4 bg-slate-900/80 border-t border-slate-800/80 flex items-center justify-between">
             <a href="https://github.com/rohith-Shaik" target="_blank" class="text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
               <i class="fa-brands fa-github text-base"></i> GitHub Repo
@@ -601,48 +511,27 @@ dev = JuniorDeveloper()
           </div>
         </div>
 
-        <!-- PROJECT 2: Django Blog Application -->
+        <!-- Django Blog Application -->
         <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between hover:border-accent-500/50 transition-all">
           <div class="p-6 sm:p-8">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-2xs font-mono font-semibold px-3 py-1 rounded-full bg-accent-500/10 text-accent-400 border border-accent-500/20">
-                Content Web App
-              </span>
+              <span class="text-2xs font-mono font-semibold px-3 py-1 rounded-full bg-accent-500/10 text-accent-400 border border-accent-500/20">Content Web App</span>
               <span class="text-2xs text-slate-500 font-mono">Django Framework</span>
             </div>
-
             <h4 class="text-2xl font-bold text-white mb-3">Django Blog Application</h4>
-            
             <p class="text-slate-300 text-sm leading-relaxed mb-6">
-              A dynamic blogging application enabling authors to publish, edit, categorize, and manage article posts with user comment sections and persistent storage.
+              Dynamic blogging application enabling authors to publish, edit, categorize, and manage article posts with user comment functionality.
             </p>
-
             <div class="space-y-2 mb-6 text-xs text-slate-300">
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-accent-400 mt-0.5"></i>
-                <span>Author CRUD workflow for blog posts & categories.</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-accent-400 mt-0.5"></i>
-                <span>Connected MySQL backend for post and user credential data.</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i class="fa-solid fa-check text-accent-400 mt-0.5"></i>
-                <span>Secure URL routing, session handling & template layout rendering.</span>
-              </div>
+              <div class="flex items-start gap-2"><i class="fa-solid fa-check text-accent-400 mt-0.5"></i><span>Author CRUD workflow for blog posts & categories.</span></div>
+              <div class="flex items-start gap-2"><i class="fa-solid fa-check text-accent-400 mt-0.5"></i><span>Connected MySQL backend for post and user credential data.</span></div>
             </div>
-
-            <!-- Tech Tags -->
             <div class="flex flex-wrap gap-2 mb-6">
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Python</span>
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Django</span>
               <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">MySQL</span>
-              <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">HTML/CSS</span>
-              <span class="text-2xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono">Git</span>
             </div>
           </div>
-
-          <!-- Bottom Card Buttons -->
           <div class="px-6 sm:px-8 py-4 bg-slate-900/80 border-t border-slate-800/80 flex items-center justify-between">
             <a href="https://github.com/rohith-Shaik" target="_blank" class="text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
               <i class="fa-brands fa-github text-base"></i> GitHub Repo
@@ -652,213 +541,148 @@ dev = JuniorDeveloper()
             </button>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- 5. EDUCATION SECTION -->
+  <!-- EDUCATION SECTION -->
   <section id="education" class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-xs uppercase tracking-widest font-mono text-brand-400 font-semibold mb-2">Academic Journey</h2>
         <h3 class="text-3xl sm:text-4xl font-bold text-white">Education & Academic Record</h3>
       </div>
 
-      <!-- Timeline Component -->
       <div class="max-w-4xl mx-auto relative border-l-2 border-slate-800 pl-6 sm:pl-8 ml-4 sm:ml-auto space-y-10">
-
-        <!-- MCA -->
         <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-darkbg border-2 border-brand-500 group-hover:scale-125 transition-transform"></div>
-          
-          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-darkbg border-2 border-brand-500"></div>
+          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <h4 class="text-xl font-bold text-white">Master of Computer Applications (MCA)</h4>
               <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 text-xs font-mono font-semibold w-fit">2023 – 2025</span>
             </div>
-            
-            <p class="text-slate-300 font-medium text-sm mb-1">
-              Jagan's Institute of Management and Computer Studies, Nellore
-            </p>
+            <p class="text-slate-300 font-medium text-sm mb-1">Jagan's Institute of Management and Computer Studies, Nellore</p>
             <p class="text-xs text-slate-500 mb-4">Affiliated to Vikrama Simhapuri University</p>
-            
             <div class="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-lg border border-emerald-500/20">
               <i class="fa-solid fa-award"></i> CGPA: 8.76 / 10.0
             </div>
           </div>
         </div>
 
-        <!-- B.Sc -->
         <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-darkbg border-2 border-accent-500 group-hover:scale-125 transition-transform"></div>
-
-          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-darkbg border-2 border-accent-500"></div>
+          <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <h4 class="text-xl font-bold text-white">Bachelor of Science (B.Sc)</h4>
               <span class="px-3 py-1 rounded-full bg-accent-500/10 text-accent-400 border border-accent-500/20 text-xs font-mono font-semibold w-fit">2020 – 2023</span>
             </div>
-            
-            <p class="text-slate-300 font-medium text-sm mb-1">
-              Krishna Chaitanya Degree College, Nellore
-            </p>
+            <p class="text-slate-300 font-medium text-sm mb-1">Krishna Chaitanya Degree College, Nellore</p>
             <p class="text-xs text-slate-500 mb-4">Affiliated to Vikrama Simhapuri University</p>
-            
             <div class="inline-flex items-center gap-2 text-sm font-bold text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-lg border border-emerald-500/20">
               <i class="fa-solid fa-award"></i> CGPA: 9.66 / 10.0
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- 6. RESUME SECTION -->
+  <!-- RESUME SECTION -->
   <section id="resume" class="py-20 bg-darkcard/40 border-y border-slate-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-slate-800 text-center space-y-6 relative overflow-hidden">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
           <i class="fa-solid fa-shield-halved"></i> 97–100 ATS Score Compliance Guaranteed
         </div>
-
         <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Curriculum Vitae / Resume</h3>
-        
         <p class="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-          Access my latest single-page ATS-formatted resume featuring academic achievements, Python & Java framework expertise, relational database architecture, and student project highlights.
+          Access my latest single-page ATS-formatted resume featuring academic achievements, Python & Java framework expertise, and project highlights.
         </p>
-
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-          <a href="shaik_rohith_resume.pdf" download="Shaik_Rohith_Resume.pdf" class="px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
+          <button onclick="downloadResume()" class="px-6 py-3.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center gap-2">
             <i class="fa-solid fa-download"></i> Download Resume PDF File
-          </a>
+          </button>
           <button onclick="openResumeModal()" class="px-6 py-3.5 text-sm font-semibold text-slate-200 border border-slate-700 hover:border-slate-500 rounded-xl hover:bg-slate-800 transition-all flex items-center gap-2">
             <i class="fa-solid fa-eye"></i> View In-Browser ATS Modal
           </button>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- 7. CONTACT SECTION -->
+  <!-- CONTACT SECTION -->
   <section id="contact" class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
         <h2 class="text-xs uppercase tracking-widest font-mono text-brand-400 font-semibold mb-2">Let's Connect</h2>
         <h3 class="text-3xl sm:text-4xl font-bold text-white mb-3">Contact & Inquiry</h3>
-        <p class="text-slate-400 text-xs sm:text-sm">
-          Interested in bringing a proactive Associate Junior Developer into your engineering team? Reach out directly!
-        </p>
+        <p class="text-slate-400 text-xs sm:text-sm">Interested in bringing a proactive Associate Junior Developer into your team? Reach out directly!</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
-        <!-- Direct Contact Info Cards -->
         <div class="lg:col-span-5 space-y-4">
-          
-          <!-- Email Card -->
           <a href="mailto:rohith.shaik.mca@gmail.com" class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4 hover:border-brand-500/50 transition-all group">
-            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-envelope"></i>
-            </div>
+            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-envelope"></i></div>
             <div class="overflow-hidden">
-              <span class="text-2xs text-slate-400 block font-mono uppercase tracking-wider">Email Address</span>
-              <span class="text-sm font-semibold text-white group-hover:text-brand-400 transition-colors truncate block">
-                rohith.shaik.mca@gmail.com
-              </span>
+              <span class="text-2xs text-slate-400 block font-mono uppercase">Email Address</span>
+              <span class="text-sm font-semibold text-white group-hover:text-brand-400 truncate block">rohith.shaik.mca@gmail.com</span>
             </div>
           </a>
-
-          <!-- Phone Card -->
           <a href="tel:+918688359259" class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4 hover:border-emerald-500/50 transition-all group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-phone"></i>
-            </div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-phone"></i></div>
             <div>
-              <span class="text-2xs text-slate-400 block font-mono uppercase tracking-wider">Phone Number</span>
-              <span class="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
-                +91 8688359259
-              </span>
+              <span class="text-2xs text-slate-400 block font-mono uppercase">Phone Number</span>
+              <span class="text-sm font-semibold text-white group-hover:text-emerald-400">+91 8688359259</span>
             </div>
           </a>
-
-          <!-- Live Portfolio Card -->
           <a href="https://rohithshaik.netlify.app" target="_blank" class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4 hover:border-emerald-500/50 transition-all group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-globe"></i>
-            </div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-globe"></i></div>
             <div class="overflow-hidden">
-              <span class="text-2xs text-slate-400 block font-mono uppercase tracking-wider">Live Portfolio Link</span>
-              <span class="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors truncate block">
-                rohithshaik.netlify.app
-              </span>
+              <span class="text-2xs text-slate-400 block font-mono uppercase">Live Portfolio Link</span>
+              <span class="text-sm font-semibold text-white group-hover:text-emerald-400 truncate block">rohithshaik.netlify.app</span>
             </div>
           </a>
-
-          <!-- LinkedIn Card -->
           <a href="https://linkedin.com/in/rohithshaik206526" target="_blank" class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4 hover:border-blue-500/50 transition-all group">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-              <i class="fa-brands fa-linkedin"></i>
-            </div>
+            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl shrink-0"><i class="fa-brands fa-linkedin"></i></div>
             <div class="overflow-hidden">
-              <span class="text-2xs text-slate-400 block font-mono uppercase tracking-wider">LinkedIn Profile</span>
-              <span class="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors truncate block">
-                linkedin.com/in/rohithshaik206526
-              </span>
+              <span class="text-2xs text-slate-400 block font-mono uppercase">LinkedIn Profile</span>
+              <span class="text-sm font-semibold text-white group-hover:text-blue-400 truncate block">linkedin.com/in/rohithshaik206526</span>
             </div>
           </a>
-
-          <!-- GitHub Card -->
           <a href="https://github.com/rohith-Shaik" target="_blank" class="glass-panel p-5 rounded-2xl border border-slate-800 flex items-center gap-4 hover:border-purple-500/50 transition-all group">
-            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-              <i class="fa-brands fa-github"></i>
-            </div>
+            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl shrink-0"><i class="fa-brands fa-github"></i></div>
             <div class="overflow-hidden">
-              <span class="text-2xs text-slate-400 block font-mono uppercase tracking-wider">GitHub Profile</span>
-              <span class="text-sm font-semibold text-white group-hover:text-purple-400 transition-colors truncate block">
-                github.com/rohith-Shaik
-              </span>
+              <span class="text-2xs text-slate-400 block font-mono uppercase">GitHub Profile</span>
+              <span class="text-sm font-semibold text-white group-hover:text-purple-400 truncate block">github.com/rohith-Shaik</span>
             </div>
           </a>
-
         </div>
 
-        <!-- Interactive Contact Form -->
         <div class="lg:col-span-7">
           <form id="contact-form" onsubmit="handleFormSubmit(event)" class="glass-panel p-8 rounded-2xl border border-slate-800 space-y-5">
-            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-2xs font-mono text-slate-400 mb-2 uppercase">Your Name *</label>
-                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 transition-colors text-xs" />
+                <input type="text" id="contact-name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 text-xs" />
               </div>
-
               <div>
                 <label class="block text-2xs font-mono text-slate-400 mb-2 uppercase">Your Email *</label>
-                <input type="email" id="contact-email" required placeholder="john@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 transition-colors text-xs" />
+                <input type="email" id="contact-email" required placeholder="john@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 text-xs" />
               </div>
             </div>
-
             <div>
               <label class="block text-2xs font-mono text-slate-400 mb-2 uppercase">Subject *</label>
-              <input type="text" id="contact-subject" required placeholder="Interview / Junior Python Role Offer" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 transition-colors text-xs" />
+              <input type="text" id="contact-subject" required placeholder="Interview / Junior Python Role Offer" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 text-xs" />
             </div>
-
             <div>
               <label class="block text-2xs font-mono text-slate-400 mb-2 uppercase">Message *</label>
-              <textarea id="contact-message" required rows="4" placeholder="Hello Rohith, we reviewed your MCA projects and would like to discuss..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 transition-colors text-xs resize-none"></textarea>
+              <textarea id="contact-message" required rows="4" placeholder="Hello Rohith, we would like to discuss..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white focus:outline-none focus:border-brand-500 text-xs resize-none"></textarea>
             </div>
-
-            <button type="submit" id="submit-btn" class="w-full py-3.5 text-xs font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 rounded-xl shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
+            <button type="submit" id="submit-btn" class="w-full py-3.5 text-xs font-semibold text-white bg-gradient-to-r from-brand-600 to-accent-600 rounded-xl shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2">
               <i class="fa-solid fa-paper-plane"></i> Send Direct Message
             </button>
           </form>
         </div>
-
       </div>
     </div>
   </section>
@@ -866,16 +690,12 @@ dev = JuniorDeveloper()
   <!-- FOOTER -->
   <footer class="py-8 bg-darkbg border-t border-slate-800/80 text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>
-        © 2026 Shaik Rohith — Associate Junior Developer Portfolio.
-      </div>
+      <div>© 2026 Shaik Rohith — Associate Junior Developer Portfolio.</div>
       <div class="flex items-center space-x-6">
-        <a href="https://rohithshaik.netlify.app" target="_blank" class="hover:text-slate-300 transition-colors">Portfolio</a>
-        <a href="https://github.com/rohith-Shaik" target="_blank" class="hover:text-slate-300 transition-colors">GitHub</a>
-        <a href="https://linkedin.com/in/rohithshaik206526" target="_blank" class="hover:text-slate-300 transition-colors">LinkedIn</a>
-        <a href="#home" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 flex items-center justify-center transition-colors">
-          <i class="fa-solid fa-arrow-up"></i>
-        </a>
+        <a href="https://rohithshaik.netlify.app" target="_blank" class="hover:text-slate-300">Portfolio</a>
+        <a href="https://github.com/rohith-Shaik" target="_blank" class="hover:text-slate-300">GitHub</a>
+        <a href="https://linkedin.com/in/rohithshaik206526" target="_blank" class="hover:text-slate-300">LinkedIn</a>
+        <a href="#home" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 flex items-center justify-center"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
     </div>
   </footer>
@@ -883,17 +703,15 @@ dev = JuniorDeveloper()
   <!-- RESUME MODAL VIEWER -->
   <div id="resume-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="relative w-full max-w-4xl bg-darkcard border border-slate-800 rounded-2xl shadow-2xl overflow-hidden my-6 max-h-[90vh] flex flex-col">
-      
-      <!-- Header Bar -->
       <div class="modal-header-bar px-6 py-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2 text-white font-bold text-sm">
           <i class="fa-regular fa-file-pdf text-brand-400"></i>
           <span>Shaik Rohith — Single Page ATS Resume</span>
         </div>
         <div class="flex items-center gap-3">
-          <a href="shaik_rohith_resume.pdf" download="Shaik_Rohith_Resume.pdf" class="px-3.5 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors flex items-center gap-1.5 shadow-md">
-            <i class="fa-solid fa-download"></i> Download PDF File
-          </a>
+          <button onclick="downloadResume()" class="px-3.5 py-1.5 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors flex items-center gap-1.5 shadow-md">
+            <i class="fa-solid fa-download"></i> Download Resume
+          </button>
           <button onclick="printResume()" class="px-3.5 py-1.5 text-xs font-semibold text-slate-200 border border-slate-700 hover:border-slate-500 rounded-lg transition-colors flex items-center gap-1.5">
             <i class="fa-solid fa-print"></i> Print Page
           </button>
@@ -903,11 +721,8 @@ dev = JuniorDeveloper()
         </div>
       </div>
 
-      <!-- Resume Content Area -->
       <div id="resume-printable" class="p-6 overflow-y-auto bg-white text-slate-900 text-xs leading-relaxed">
         <div class="max-w-3xl mx-auto space-y-3 font-sans">
-          
-          <!-- Header -->
           <div class="border-b-2 border-blue-900 pb-2">
             <h1 class="text-xl font-bold uppercase text-slate-900 tracking-tight">Shaik Rohith</h1>
             <div class="text-xs font-bold text-blue-600 uppercase tracking-wider">Associate Junior Developer / Software Engineer</div>
@@ -920,7 +735,6 @@ dev = JuniorDeveloper()
             </div>
           </div>
 
-          <!-- Summary -->
           <div>
             <h2 class="text-xs font-bold uppercase text-blue-900 border-b border-slate-300 pb-0.5 mb-1">Professional Summary</h2>
             <p class="text-2xs text-slate-700 leading-normal">
@@ -928,35 +742,20 @@ dev = JuniorDeveloper()
             </p>
           </div>
 
-          <!-- Technical Skills Table -->
           <div>
             <h2 class="text-xs font-bold uppercase text-blue-900 border-b border-slate-300 pb-0.5 mb-1">Technical Skills</h2>
             <table class="w-full text-2xs text-slate-800 border-collapse">
               <tbody>
-                <tr>
-                  <td class="font-bold py-0.5 w-1/4">Languages:</td>
-                  <td class="py-0.5">Python, Java, JavaScript, HTML5, CSS3</td>
-                </tr>
-                <tr>
-                  <td class="font-bold py-0.5">Frameworks:</td>
-                  <td class="py-0.5">Django, FastAPI, Bootstrap</td>
-                </tr>
-                <tr>
-                  <td class="font-bold py-0.5">Databases:</td>
-                  <td class="py-0.5">MySQL, PostgreSQL</td>
-                </tr>
-                <tr>
-                  <td class="font-bold py-0.5">Tools & Version Control:</td>
-                  <td class="py-0.5">Git, GitHub, Visual Studio Code, PyCharm</td>
-                </tr>
+                <tr><td class="font-bold py-0.5 w-1/4">Languages:</td><td class="py-0.5">Python, Java, JavaScript, HTML5, CSS3</td></tr>
+                <tr><td class="font-bold py-0.5">Frameworks:</td><td class="py-0.5">Django, FastAPI, Bootstrap</td></tr>
+                <tr><td class="font-bold py-0.5">Databases:</td><td class="py-0.5">MySQL, PostgreSQL</td></tr>
+                <tr><td class="font-bold py-0.5">Tools & Version Control:</td><td class="py-0.5">Git, GitHub, Visual Studio Code, PyCharm</td></tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Academic Projects -->
           <div>
             <h2 class="text-xs font-bold uppercase text-blue-900 border-b border-slate-300 pb-0.5 mb-1">Academic Projects</h2>
-            
             <div class="mb-2">
               <div class="flex justify-between items-baseline font-bold text-2xs text-slate-900">
                 <span>Student Management System Web Application</span>
@@ -969,7 +768,6 @@ dev = JuniorDeveloper()
                 <li>Developed dynamic front-end UI layouts using Django Template Language (DTL), HTML, CSS, and Bootstrap.</li>
               </ul>
             </div>
-
             <div>
               <div class="flex justify-between items-baseline font-bold text-2xs text-slate-900">
                 <span>Django Blog Web Application</span>
@@ -983,10 +781,8 @@ dev = JuniorDeveloper()
             </div>
           </div>
 
-          <!-- Education -->
           <div>
             <h2 class="text-xs font-bold uppercase text-blue-900 border-b border-slate-300 pb-0.5 mb-1">Education</h2>
-            
             <div class="mb-1.5">
               <div class="flex justify-between items-baseline text-2xs">
                 <span class="font-bold text-slate-900">Master of Computer Applications (MCA)</span>
@@ -995,7 +791,6 @@ dev = JuniorDeveloper()
               <div class="text-2xs text-slate-700">Jagan's Institute of Management and Computer Studies, Nellore (Affiliated to VSU)</div>
               <div class="text-2xs font-semibold text-emerald-700">CGPA: 8.76 / 10.0</div>
             </div>
-
             <div>
               <div class="flex justify-between items-baseline text-2xs">
                 <span class="font-bold text-slate-900">Bachelor of Science (B.Sc)</span>
@@ -1006,14 +801,12 @@ dev = JuniorDeveloper()
             </div>
           </div>
 
-          <!-- Languages -->
           <div>
             <h2 class="text-xs font-bold uppercase text-blue-900 border-b border-slate-300 pb-0.5 mb-0.5">Languages</h2>
             <p class="text-2xs text-slate-800">
               <strong>English</strong> (Professional Working), <strong>Telugu</strong> (Native), <strong>Hindi</strong> (Conversational)
             </p>
           </div>
-
         </div>
       </div>
     </div>
@@ -1022,46 +815,26 @@ dev = JuniorDeveloper()
   <!-- PROJECT DETAILS MODAL -->
   <div id="project-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
     <div class="relative w-full max-w-2xl bg-darkcard border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
-      
       <div class="flex items-center justify-between border-b border-slate-800 pb-4">
         <h3 id="proj-modal-title" class="text-xl sm:text-2xl font-bold text-white">Project Specs</h3>
-        <button onclick="closeProjectModal()" class="text-slate-400 hover:text-white text-lg">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button onclick="closeProjectModal()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
-      <div id="proj-modal-body" class="space-y-4 text-xs text-slate-300 leading-relaxed">
-        <!-- Content injected dynamically via JS -->
-      </div>
-
+      <div id="proj-modal-body" class="space-y-4 text-xs text-slate-300 leading-relaxed"></div>
       <div class="pt-4 border-t border-slate-800 flex justify-end">
-        <button onclick="closeProjectModal()" class="px-4 py-2 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg">
-          Close Window
-        </button>
+        <button onclick="closeProjectModal()" class="px-4 py-2 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg">Close Window</button>
       </div>
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION CONTAINER -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- JAVASCRIPT LOGIC ENGINE -->
   <script>
-    // 1. TYPING TEXT ANIMATION
-    const typingPhrases = [
-      "Python & Web Developer",
-      "Django & FastAPI Developer",
-      "MCA Graduate (8.76 CGPA)",
-      "Associate Junior Developer"
-    ];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
+    const typingPhrases = ["Python & Web Developer", "Django & FastAPI Developer", "MCA Graduate (8.76 CGPA)", "Associate Junior Developer"];
+    let phraseIndex = 0, charIndex = 0, isDeleting = false;
     const typingElement = document.getElementById("typing-text");
 
     function typeEffect() {
       const currentPhrase = typingPhrases[phraseIndex];
-      
       if (isDeleting) {
         typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
         charIndex--;
@@ -1069,9 +842,7 @@ dev = JuniorDeveloper()
         typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
         charIndex++;
       }
-
       let speed = isDeleting ? 35 : 75;
-
       if (!isDeleting && charIndex === currentPhrase.length) {
         speed = 1800;
         isDeleting = true;
@@ -1080,94 +851,41 @@ dev = JuniorDeveloper()
         phraseIndex = (phraseIndex + 1) % typingPhrases.length;
         speed = 350;
       }
-
       setTimeout(typeEffect, speed);
     }
 
-    // 2. SKILLS CATEGORY FILTER & SEARCH ENGINE
     let currentCategory = 'all';
-
     function setSkillCategory(cat) {
       currentCategory = cat;
-      const tabs = document.querySelectorAll('.skill-tab');
-      tabs.forEach(tab => {
+      document.querySelectorAll('.skill-tab').forEach(tab => {
         tab.classList.remove('bg-brand-600', 'text-white');
         tab.classList.add('bg-slate-900', 'text-slate-400');
       });
-
       const activeTab = document.getElementById(`tab-${cat}`);
       if (activeTab) {
         activeTab.classList.remove('bg-slate-900', 'text-slate-400');
         activeTab.classList.add('bg-brand-600', 'text-white');
       }
-
       filterSkills();
     }
 
     function filterSkills() {
       const query = document.getElementById('skill-search').value.toLowerCase();
-      const cards = document.querySelectorAll('.skill-card');
-
-      cards.forEach(card => {
+      document.querySelectorAll('.skill-card').forEach(card => {
         const catMatch = currentCategory === 'all' || card.dataset.category === currentCategory;
         const nameMatch = card.dataset.name.toLowerCase().includes(query);
-
-        if (catMatch && nameMatch) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
+        card.classList.toggle('hidden', !(catMatch && nameMatch));
       });
     }
 
-    // 3. PROJECT MODAL ENGINE
     const projectDetails = {
       sms: {
         title: "Student Management System — Deep Dive Specs",
-        body: `
-          <div class="space-y-4">
-            <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <h5 class="font-bold text-white mb-1">Architecture Overview:</h5>
-              <p>Built with Django MVT architecture. Handles relational student profiles, enrollment status, faculty courses, and performance indexing.</p>
-            </div>
-            <div>
-              <h5 class="font-bold text-white mb-1">Database Schema:</h5>
-              <ul class="list-disc pl-4 space-y-1 text-slate-400">
-                <li><code>Student Profile</code> Table: Linked to Django Auth User with custom demographic data.</li>
-                <li><code>Course Assignment</code> Table: Relational foreign key binding faculty, students, and credits.</li>
-                <li><code>Grade Tracker</code> Table: Aggregates calculated GPA marks with automated validation triggers.</li>
-              </ul>
-            </div>
-            <div>
-              <h5 class="font-bold text-white mb-1">Key Features Implemented:</h5>
-              <ul class="list-disc pl-4 space-y-1 text-slate-400">
-                <li>Admin & Faculty Dashboard with dynamic charts & CSV export metrics.</li>
-                <li>Live AJAX-enabled search bar for instantaneous student query lookup.</li>
-                <li>Form sanitation, CSRF protection, and permission-restricted views.</li>
-              </ul>
-            </div>
-          </div>
-        `
+        body: `<div class="space-y-4"><div class="p-3 rounded-lg bg-slate-900 border border-slate-800"><h5 class="font-bold text-white mb-1">Architecture Overview:</h5><p>Django MVT architecture handling relational student profiles, enrollment, faculty courses, and performance indexing.</p></div><div><h5 class="font-bold text-white mb-1">Key Features:</h5><ul class="list-disc pl-4 space-y-1 text-slate-400"><li>Role-based authentication & admin dashboard metrics.</li><li>Live AJAX-enabled search bar for instantaneous student query lookup.</li><li>Secure CRUD operations & form validation.</li></ul></div></div>`
       },
       blog: {
         title: "Django Blog Application — Deep Dive Specs",
-        body: `
-          <div class="space-y-4">
-            <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
-              <h5 class="font-bold text-white mb-1">Architecture Overview:</h5>
-              <p>Dynamic content publishing web platform built using Django forms, session management, dynamic templates, and MySQL storage.</p>
-            </div>
-            <div>
-              <h5 class="font-bold text-white mb-1">Key Features Implemented:</h5>
-              <ul class="list-disc pl-4 space-y-1 text-slate-400">
-                <li>Author Authentication: Secure login, signup, and post authorship logic.</li>
-                <li>CRUD Engine: Authors can draft, publish, modify, and delete articles.</li>
-                <li>MySQL Database Layer: Efficient indexing of posts, categories, tags, and reader comments.</li>
-                <li>Clean dynamic URL dispatchers for SEO-friendly post slugs.</li>
-              </ul>
-            </div>
-          </div>
-        `
+        body: `<div class="space-y-4"><div class="p-3 rounded-lg bg-slate-900 border border-slate-800"><h5 class="font-bold text-white mb-1">Architecture Overview:</h5><p>Dynamic content publishing web platform built using Django forms, session management, and MySQL storage.</p></div><div><h5 class="font-bold text-white mb-1">Key Features:</h5><ul class="list-disc pl-4 space-y-1 text-slate-400"><li>Author authentication and post authorship logic.</li><li>CRUD engine for article publication and category organization.</li><li>Relational MySQL backend connectivity.</li></ul></div></div>`
       }
     };
 
@@ -1186,7 +904,6 @@ dev = JuniorDeveloper()
       document.body.style.overflow = "auto";
     }
 
-    // 4. RESUME MODAL & DOWNLOAD LOGIC
     function openResumeModal() {
       document.getElementById("resume-modal").classList.remove("hidden");
       document.body.style.overflow = "hidden";
@@ -1202,40 +919,33 @@ dev = JuniorDeveloper()
     }
 
     function downloadResume() {
-      // Trigger HTML5 direct file download
-      const link = document.createElement("a");
-      link.href = "shaik_rohith_resume.pdf";
-      link.download = "Shaik_Rohith_Resume.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      showToast("Downloading Shaik Rohith Resume PDF...", "success");
+      // Reliable fallback: generate printable HTML as a data blob download
+      const resumeHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Shaik Rohith - Resume</title><style>body{font-family:sans-serif;padding:20px;color:#1e293b;max-width:800px;margin:0 auto;}h1{font-size:22px;margin:0;text-transform:uppercase;}h2{font-size:12px;text-transform:uppercase;color:#1e3a8a;border-bottom:1px solid #cbd5e1;padding-bottom:2px;margin-top:16px;}ul{padding-left:16px;margin:4px 0;}li{font-size:11px;margin-bottom:2px;}</style></head><body><h1>Shaik Rohith</h1><p><b>Associate Junior Developer</b> | rohith.shaik.mca@gmail.com | +91 8688359259 | rohithshaik.netlify.app</p><h2>Professional Summary</h2><p style="font-size:11px;">MCA Graduate seeking an entry-level position as an Associate Junior Developer. Skilled in Python, Java, Django, FastAPI, MySQL, PostgreSQL, and JavaScript.</p><h2>Technical Skills</h2><p style="font-size:11px;"><b>Languages:</b> Python, Java, JavaScript<br><b>Frameworks:</b> Django, FastAPI, Bootstrap<br><b>Databases:</b> MySQL, PostgreSQL<br><b>Tools:</b> Git, GitHub, VS Code</p><h2>Academic Projects</h2><p style="font-size:11px;"><b>Student Management System Web Application</b> (Python, Django, MySQL)<br>- Engineered full-stack web app for student records, enrollment, and grade administration.<br>- Implemented role-based authentication and secure CRUD operations.</p><p style="font-size:11px;"><b>Django Blog Application</b> (Python, Django, MySQL)<br>- Built a dynamic blogging web platform with user post creation, editing, and comment storage.</p><h2>Education</h2><p style="font-size:11px;"><b>MCA</b> - Jagan's Institute of Management and Computer Studies (8.76 CGPA)<br><b>B.Sc</b> - Krishna Chaitanya Degree College (9.66 CGPA)</p><h2>Languages</h2><p style="font-size:11px;">English, Telugu, Hindi</p></body></html>`;
+      const blob = new Blob([resumeHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Shaik_Rohith_Resume.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Resume downloaded successfully!", "success");
     }
 
-    // 5. MOBILE MENU CONTROLLER
     const mobileBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
+    mobileBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+    function closeMobileMenu() { mobileMenu.classList.add("hidden"); }
 
-    mobileBtn.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    function closeMobileMenu() {
-      mobileMenu.classList.add("hidden");
-    }
-
-    // 6. CONTACT FORM & TOAST NOTIFICATION ENGINE
     function handleFormSubmit(e) {
       e.preventDefault();
       const btn = document.getElementById("submit-btn");
-
       btn.disabled = true;
       btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Processing...`;
-
       setTimeout(() => {
         btn.disabled = false;
         btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Send Direct Message`;
-        
         document.getElementById("contact-form").reset();
         showToast("Message sent successfully! Shaik Rohith will get back to you shortly.", "success");
       }, 1000);
@@ -1244,49 +954,28 @@ dev = JuniorDeveloper()
     function showToast(message, type = "success") {
       const container = document.getElementById("toast-container");
       const toast = document.createElement("div");
-      
-      const icon = type === "success" ? "fa-circle-check text-emerald-400" : "fa-circle-info text-brand-400";
-      
       toast.className = `animate-toast pointer-events-auto p-4 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-mono shadow-2xl flex items-center gap-3 max-w-md`;
-      toast.innerHTML = `
-        <i class="fa-solid ${icon} text-base"></i>
-        <span>${message}</span>
-      `;
-
+      toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-base"></i><span>${message}</span>`;
       container.appendChild(toast);
-
       setTimeout(() => {
         toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
         setTimeout(() => toast.remove(), 300);
       }, 4000);
     }
 
-    // 7. ACTIVE SCROLLSPY HIGHLIGHTER FOR NAV LINKS
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
-
     window.addEventListener("scroll", () => {
       let current = "";
       sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute("id");
-        }
+        if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute("id");
       });
-
       navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${current}`) {
-          link.classList.add("active");
-        }
+        link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
       });
     });
 
-    // Initialize typing animation on page load
-    window.onload = function() {
-      typeEffect();
-    };
+    window.onload = () => typeEffect();
   </script>
 </body>
 </html>
